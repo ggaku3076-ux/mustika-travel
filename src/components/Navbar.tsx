@@ -1,0 +1,187 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X, ArrowRight } from "lucide-react";
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Close menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [isOpen]);
+
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Paket Wisata", href: "/paket" },
+    { name: "Armada", href: "/armada" },
+    { name: "Booking", href: "/booking" },
+    { name: "Kontak", href: "/lokasi" },
+  ];
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
+
+  const isHome = pathname === "/";
+  const headerBgClass = isHome 
+    ? "absolute top-0 left-0 w-full z-50 bg-transparent border-b-0" 
+    : "absolute top-0 left-0 w-full z-50 bg-brand-blue shadow-md border-b border-white/10";
+
+  const ctaBtnClass = isHome
+    ? "bg-brand-blue text-white hover:bg-brand-blue-light"
+    : "bg-white text-brand-blue hover:bg-white/95";
+
+  return (
+    <>
+      <header className={headerBgClass}>
+        <div className="mx-auto grid grid-cols-2 md:grid-cols-3 items-center max-w-7xl p-4 md:px-8">
+          
+          {/* Left: Logo & Name */}
+          <Link 
+            href="/" 
+            className="flex items-center gap-3 transition-opacity hover:opacity-90 justify-start"
+            aria-label="Mustika Travel - Kembali ke Beranda"
+          >
+            <div className="relative h-12 w-12 shrink-0 rounded-full overflow-hidden bg-white/20 flex items-center justify-center border border-white/10">
+              <span className="font-nunito font-extrabold text-white text-lg tracking-wider">MT</span>
+            </div>
+            <span className="font-nunito font-semibold text-xl tracking-tight text-white leading-none">
+              Mustika Travel
+            </span>
+          </Link>
+
+          {/* Center: Desktop nav links */}
+          <nav className="hidden md:flex items-center justify-center gap-8" aria-label="Main Navigation">
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`text-sm font-semibold transition-colors duration-200 relative py-1 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:bg-white after:transition-all after:duration-300 ${
+                    active 
+                      ? "text-white after:w-1/2" 
+                      : "text-white/80 hover:text-white after:w-0 hover:after:w-1/2"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Right: Desktop CTA */}
+          <div className="hidden md:flex justify-end">
+            <Link
+              href="/booking"
+              className={`inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-300 transform hover:translate-x-0.5 ${ctaBtnClass}`}
+            >
+              <span>Booking Sekarang</span>
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
+
+          {/* Mobile: Hamburger / X toggle */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="flex items-center justify-center p-2 md:hidden col-start-2 ml-auto text-white relative w-10 h-10"
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+            aria-label={isOpen ? "Tutup menu" : "Buka menu"}
+          >
+            <Menu 
+              className={`h-6 w-6 absolute transition-all duration-300 ease-in-out ${
+                isOpen ? "opacity-0 rotate-90 scale-75" : "opacity-100 rotate-0 scale-100"
+              }`} 
+              aria-hidden="true" 
+            />
+            <X 
+              className={`h-6 w-6 absolute transition-all duration-300 ease-in-out ${
+                isOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-75"
+              }`} 
+              aria-hidden="true" 
+            />
+          </button>
+        </div>
+      </header>
+
+      {/* === MOBILE FULLSCREEN POPUP MENU === */}
+      <div 
+        className={`fixed inset-0 bg-brand-dark/60 backdrop-blur-sm z-[998] md:hidden transition-opacity duration-300 ${
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setIsOpen(false)}
+        aria-hidden="true"
+      />
+
+      <nav
+        id="mobile-menu"
+        className={`fixed inset-0 z-[999] flex items-center justify-center md:hidden pointer-events-none transition-all duration-300 ${
+          isOpen ? "opacity-100" : "opacity-0"
+        }`}
+        aria-label="Mobile Navigation"
+      >
+        <div 
+          className={`bg-white rounded-3xl shadow-2xl w-[85vw] max-w-sm p-8 flex flex-col items-center gap-5 transition-all duration-400 ease-out ${
+            isOpen 
+              ? "scale-100 translate-y-0 opacity-100 pointer-events-auto" 
+              : "scale-90 translate-y-8 opacity-0 pointer-events-none"
+          }`}
+        >
+          <div className="flex items-center gap-2.5 mb-2">
+            <div className="relative h-10 w-10 shrink-0 rounded-full bg-brand-blue flex items-center justify-center">
+              <span className="font-nunito font-extrabold text-white text-sm">MT</span>
+            </div>
+            <span className="font-nunito font-semibold text-lg text-brand-dark tracking-tight">
+              Mustika Travel
+            </span>
+          </div>
+
+          <div className="w-12 h-0.5 bg-brand-blue/20 rounded-full" />
+
+          {navLinks.map((link, i) => {
+            const active = isActive(link.href);
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`text-base font-semibold tracking-wide transition-all duration-200 py-1.5 ${
+                  active ? "text-brand-blue" : "text-brand-dark/70 hover:text-brand-blue"
+                }`}
+                style={{ transitionDelay: isOpen ? `${(i + 1) * 50}ms` : "0ms" }}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+
+          <div className="w-12 h-0.5 bg-brand-blue/20 rounded-full" />
+
+          <Link
+            href="/booking"
+            onClick={() => setIsOpen(false)}
+            className="inline-flex items-center justify-center gap-2 w-full rounded-2xl bg-brand-blue py-3 text-sm font-bold text-white hover:bg-brand-blue-light transition-colors duration-200"
+          >
+            <span>Booking Sekarang</span>
+          </Link>
+        </div>
+      </nav>
+    </>
+  );
+}
