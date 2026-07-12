@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ShieldCheck, UserCheck, Settings, Fuel, Heart } from "lucide-react";
 
 export default function ArmadaSection() {
@@ -7,6 +8,7 @@ export default function ArmadaSection() {
       type: "MPV",
       capacity: "6 Penumpang",
       price: 350000,
+      imagePath: "/Asset/AVANZA.png",
       description: "Mobil keluarga sejuta umat yang hemat bahan bakar, sangat cocok untuk perjalanan dalam kota maupun luar kota.",
       features: ["AC Double Blower", "Driver Profesional", "BBM Tidak Termasuk"],
     },
@@ -15,6 +17,7 @@ export default function ArmadaSection() {
       type: "MPV Premium",
       capacity: "7 Penumpang",
       price: 650000,
+      imagePath: "/Asset/INOVA REBORNN.png",
       description: "Lebih lega, nyaman, suspensi empuk, dan tampilan elegan untuk perjalanan dinas maupun keluarga.",
       features: ["AC Dingin Nyaman", "Driver Profesional", "Audio System Premium"],
     },
@@ -23,6 +26,7 @@ export default function ArmadaSection() {
       type: "Minibus",
       capacity: "14 Penumpang",
       price: 1100000,
+      imagePath: "/Asset/HIACE.png",
       description: "Pilihan terbaik untuk rombongan wisata skala medium dengan kenyamanan suspensi layaknya sedan.",
       features: ["Kapasitas Lega", "Driver Berpengalaman", "Reclining Seats"],
     },
@@ -31,6 +35,7 @@ export default function ArmadaSection() {
       type: "Minibus",
       capacity: "19 Penumpang",
       price: 1200000,
+      imagePath: "/Asset/ELF LONG.png",
       description: "Sangat cocok untuk rombongan wisata ziarah wali, kunjungan kerja instansi, atau reuni keluarga besar.",
       features: ["AC Ducting Dingin", "Driver & BBM Opsional", "Bagasi Luas"],
     },
@@ -64,30 +69,45 @@ export default function ArmadaSection() {
             return (
               <div 
                 key={index}
-                className="bg-white p-8 rounded-2xl border border-slate-150 hover:border-brand-orange transition-all duration-300 flex flex-col justify-between shadow-sm"
+                className="bg-white rounded-2xl border border-slate-150 hover:border-brand-orange transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-sm"
               >
-                <div>
-                  <span className="text-[10px] uppercase font-extrabold text-brand-orange bg-brand-cream px-2.5 py-1 rounded-full border border-brand-orange/10">
-                    {mobil.type}
-                  </span>
-                  <h3 className="text-xl font-bold text-brand-dark mt-4 font-nunito">{mobil.name}</h3>
-                  <span className="text-xs text-slate-400 block mt-1">{mobil.capacity}</span>
-                  <p className="text-sm text-brand-dark/60 leading-relaxed mt-4 font-light">{mobil.description}</p>
-                  
-                  {/* Mini Features */}
-                  <div className="mt-6 space-y-2 border-t border-slate-100 pt-4">
-                    {mobil.features.map((feat, idx) => (
-                      <span key={idx} className="block text-xs text-slate-500">• {feat}</span>
-                    ))}
-                  </div>
+                {/* Image Header with raw/uncompressed render optimization */}
+                <div className="relative h-48 w-full bg-slate-150">
+                  <Image
+                    src={mobil.imagePath}
+                    alt={mobil.name}
+                    fill
+                    unoptimized
+                    priority={index < 2}
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className="object-cover object-center"
+                  />
                 </div>
 
-                <div className="mt-8 border-t border-slate-100 pt-5">
-                  <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Mulai Dari</span>
-                  <div className="flex items-baseline justify-between mt-1">
-                    <span className="text-lg font-extrabold text-brand-dark">
-                      Rp {mobil.price.toLocaleString("id-ID")}<span className="text-xs font-normal text-slate-400">/hari</span>
+                <div className="p-6 flex-grow flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] uppercase font-extrabold text-brand-orange bg-brand-cream px-2.5 py-1 rounded-full border border-brand-orange/10">
+                      {mobil.type}
                     </span>
+                    <h3 className="text-xl font-bold text-brand-dark mt-4 font-nunito">{mobil.name}</h3>
+                    <span className="text-xs text-slate-400 block mt-1">{mobil.capacity}</span>
+                    <p className="text-sm text-brand-dark/60 leading-relaxed mt-4 font-light">{mobil.description}</p>
+                    
+                    {/* Mini Features */}
+                    <div className="mt-6 space-y-2 border-t border-slate-100 pt-4">
+                      {mobil.features.map((feat, idx) => (
+                        <span key={idx} className="block text-xs text-slate-500">• {feat}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-8 border-t border-slate-100 pt-5">
+                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Mulai Dari</span>
+                    <div className="flex items-baseline justify-between mt-1">
+                      <span className="text-lg font-extrabold text-brand-dark">
+                        Rp {mobil.price.toLocaleString("id-ID")}<span className="text-xs font-normal text-slate-400">/hari</span>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>

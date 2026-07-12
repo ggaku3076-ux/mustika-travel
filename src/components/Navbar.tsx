@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,15 +36,9 @@ export default function Navbar() {
     return pathname.startsWith(href);
   };
 
-  const isHome = pathname === "/";
-
   return (
     <>
-      <header className={`absolute top-0 left-0 w-full z-50 border-b transition-all duration-300 ${
-        isHome 
-          ? "bg-transparent border-white/10" 
-          : "bg-brand-blue border-brand-blue/20 shadow-md"
-      }`}>
+      <header className="absolute top-0 left-0 w-full z-50 bg-transparent border-b border-white/10">
         <div className="mx-auto flex items-center justify-between max-w-7xl p-4 md:px-8">
           
           {/* Left: Logo Transparan */}
@@ -55,9 +50,9 @@ export default function Navbar() {
             <div className="relative h-12 w-12 shrink-0 overflow-hidden flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/Asset/LOGO.png"
+                src="/Asset/logo real.png"
                 alt="Mustika Travel Logo"
-                className="h-full w-full object-contain filter drop-shadow-sm bg-transparent"
+                className="h-full w-full object-contain filter drop-shadow-sm mix-blend-multiply bg-transparent"
               />
             </div>
             <span className="font-nunito font-semibold text-lg tracking-tight text-white leading-none">
@@ -121,72 +116,76 @@ export default function Navbar() {
       </header>
 
       {/* === MOBILE FULLSCREEN POPUP MENU === */}
-      <div 
-        className={`fixed inset-0 bg-brand-dark/60 backdrop-blur-sm z-[998] md:hidden transition-opacity duration-300 ${
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
-        onClick={() => setIsOpen(false)}
-        aria-hidden="true"
-      />
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-brand-dark/60 backdrop-blur-sm z-[998] md:hidden"
+              onClick={() => setIsOpen(false)}
+              aria-hidden="true"
+            />
 
-      <nav
-        id="mobile-menu"
-        className={`fixed inset-0 z-[999] flex items-center justify-center md:hidden pointer-events-none transition-all duration-300 ${
-          isOpen ? "opacity-100" : "opacity-0"
-        }`}
-        aria-label="Mobile Navigation"
-      >
-        <div 
-          className={`bg-brand-cream rounded-3xl shadow-2xl w-[85vw] max-w-sm p-8 flex flex-col items-center gap-5 transition-all duration-400 ease-out ${
-            isOpen 
-              ? "scale-100 translate-y-0 opacity-100 pointer-events-auto" 
-              : "scale-90 translate-y-8 opacity-0 pointer-events-none"
-          }`}
-        >
-          <div className="flex items-center gap-2.5 mb-2">
-            <div className="relative h-10 w-10 shrink-0 overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/Asset/LOGO.png"
-                alt="Mustika Travel Logo"
-                className="h-full w-full object-contain bg-transparent"
-              />
-            </div>
-            <span className="font-nunito font-semibold text-lg text-brand-dark tracking-tight">
-              Mustika Travel
-            </span>
-          </div>
-
-          <div className="w-12 h-0.5 bg-brand-orange/20 rounded-full" />
-
-          {navLinks.map((link, i) => {
-            const active = isActive(link.href);
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`text-base font-semibold tracking-wide transition-all duration-200 py-1.5 ${
-                  active ? "text-brand-orange font-bold" : "text-brand-dark/70 hover:text-brand-orange"
-                }`}
-                style={{ transitionDelay: isOpen ? `${(i + 1) * 50}ms` : "0ms" }}
+            <nav
+              id="mobile-menu"
+              className="fixed inset-0 z-[999] flex items-center justify-center md:hidden"
+              aria-label="Mobile Navigation"
+            >
+              <motion.div 
+                initial={{ scale: 0.9, y: 32, opacity: 0 }}
+                animate={{ scale: 1, y: 0, opacity: 1 }}
+                exit={{ scale: 0.9, y: 32, opacity: 0 }}
+                transition={{ type: "spring", duration: 0.5 }}
+                className="bg-brand-cream rounded-3xl shadow-2xl w-[85vw] max-w-sm p-8 flex flex-col items-center gap-5"
               >
-                {link.name}
-              </Link>
-            );
-          })}
+                <div className="flex items-center gap-2.5 mb-2">
+                  <div className="relative h-10 w-10 shrink-0 overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/Asset/logo real.png"
+                      alt="Mustika Travel Logo"
+                      className="h-full w-full object-contain mix-blend-multiply bg-transparent"
+                    />
+                  </div>
+                  <span className="font-nunito font-semibold text-lg text-brand-dark tracking-tight">
+                    Mustika Travel
+                  </span>
+                </div>
 
-          <div className="w-12 h-0.5 bg-brand-orange/20 rounded-full" />
+                <div className="w-12 h-0.5 bg-brand-orange/20 rounded-full" />
 
-          <Link
-            href="/booking"
-            onClick={() => setIsOpen(false)}
-            className="inline-flex items-center justify-center gap-2 w-full rounded-2xl bg-brand-orange py-3 text-sm font-bold text-white hover:bg-brand-orange-light transition-colors duration-200"
-          >
-            <span>Booking Sekarang</span>
-          </Link>
-        </div>
-      </nav>
+                {navLinks.map((link) => {
+                  const active = isActive(link.href);
+                  return (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className={`text-base font-semibold tracking-wide transition-all duration-200 py-1.5 ${
+                        active ? "text-brand-orange font-bold" : "text-brand-dark/70 hover:text-brand-orange"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                })}
+
+                <div className="w-12 h-0.5 bg-brand-orange/20 rounded-full" />
+
+                <Link
+                  href="/booking"
+                  onClick={() => setIsOpen(false)}
+                  className="inline-flex items-center justify-center gap-2 w-full rounded-2xl bg-brand-orange py-3 text-sm font-bold text-white hover:bg-brand-orange-light transition-colors duration-200"
+                >
+                  <span>Booking Sekarang</span>
+                </Link>
+              </motion.div>
+            </nav>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }
