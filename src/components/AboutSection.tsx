@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Users, Calendar, Award, CheckCircle2, ChevronRight } from "lucide-react";
+import { Users, Calendar, Award, CheckCircle2, ChevronRight, Car, Compass, Plane } from "lucide-react";
 
 interface TransportService {
   id: string;
@@ -124,6 +124,63 @@ export default function AboutSection() {
                 />
               </div>
 
+              {/* Jenis Layanan Custom Radio Cards */}
+              <div>
+                <label className="block text-sm font-bold text-brand-dark mb-3">Jenis Layanan</label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {/* Option 1: Rental */}
+                  <button
+                    type="button"
+                    onClick={() => setServiceType("rental")}
+                    className={`flex flex-col items-start p-4 rounded-2xl border text-left transition-all ${
+                      serviceType === "rental"
+                        ? "border-brand-orange bg-brand-cream/50 ring-2 ring-brand-orange/20"
+                        : "border-slate-200 bg-slate-50 hover:bg-slate-100"
+                    }`}
+                  >
+                    <div className={`p-2 rounded-xl mb-3 ${serviceType === "rental" ? "bg-brand-orange text-white" : "bg-slate-200 text-slate-500"}`}>
+                      <Car className="h-5 w-5" />
+                    </div>
+                    <span className="text-xs font-bold text-brand-dark">Sewa Mobil</span>
+                    <span className="text-[10px] text-slate-400 mt-1">Sewa unit mobil + driver harian</span>
+                  </button>
+
+                  {/* Option 2: Paket */}
+                  <button
+                    type="button"
+                    onClick={() => setServiceType("paket")}
+                    className={`flex flex-col items-start p-4 rounded-2xl border text-left transition-all ${
+                      serviceType === "paket"
+                        ? "border-brand-orange bg-brand-cream/50 ring-2 ring-brand-orange/20"
+                        : "border-slate-200 bg-slate-50 hover:bg-slate-100"
+                    }`}
+                  >
+                    <div className={`p-2 rounded-xl mb-3 ${serviceType === "paket" ? "bg-brand-orange text-white" : "bg-slate-200 text-slate-500"}`}>
+                      <Compass className="h-5 w-5" />
+                    </div>
+                    <span className="text-xs font-bold text-brand-dark">Paket Wisata</span>
+                    <span className="text-[10px] text-slate-400 mt-1">Tur destinasi pilihan kustom</span>
+                  </button>
+
+                  {/* Option 3: Drop */}
+                  <button
+                    type="button"
+                    onClick={() => setServiceType("drop")}
+                    className={`flex flex-col items-start p-4 rounded-2xl border text-left transition-all ${
+                      serviceType === "drop"
+                        ? "border-brand-orange bg-brand-cream/50 ring-2 ring-brand-orange/20"
+                        : "border-slate-200 bg-slate-50 hover:bg-slate-100"
+                    }`}
+                  >
+                    <div className={`p-2 rounded-xl mb-3 ${serviceType === "drop" ? "bg-brand-orange text-white" : "bg-slate-200 text-slate-500"}`}>
+                      <Plane className="h-5 w-5" />
+                    </div>
+                    <span className="text-xs font-bold text-brand-dark">Antar-Jemput</span>
+                    <span className="text-[10px] text-slate-400 mt-1">Layanan drop-off bandara/hotel</span>
+                  </button>
+                </div>
+              </div>
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-brand-dark mb-2">Jumlah Penumpang</label>
@@ -152,30 +209,15 @@ export default function AboutSection() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-bold text-brand-dark mb-2">Jenis Layanan</label>
-                  <select
-                    value={serviceType}
-                    onChange={(e) => setServiceType(e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-brand-dark focus:outline-none focus:border-brand-orange"
-                  >
-                    <option value="rental">Sewa Mobil + Driver</option>
-                    <option value="paket">Paket Tour Wisata</option>
-                    <option value="drop">Antar-Jemput (Drop-off)</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-bold text-brand-dark mb-2">Tanggal Berangkat</label>
-                  <input
-                    type="date"
-                    required
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-brand-dark focus:outline-none focus:border-brand-orange"
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-bold text-brand-dark mb-2">Tanggal Berangkat</label>
+                <input
+                  type="date"
+                  required
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-brand-dark focus:outline-none focus:border-brand-orange"
+                />
               </div>
 
               <button
@@ -204,7 +246,7 @@ export default function AboutSection() {
             <div className="bg-brand-orange text-white p-6 md:p-8 rounded-3xl shadow-lg relative overflow-hidden">
               <div className="absolute right-0 top-0 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none" />
               
-              <span className="text-[10px] font-bold uppercase tracking-widest text-brand-orange bg-white/15 px-3 py-1 rounded-full">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-white bg-white/15 px-3 py-1 rounded-full">
                 Rekomendasi Armada Anda
               </span>
 
