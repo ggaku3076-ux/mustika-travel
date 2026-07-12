@@ -20,20 +20,20 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Mustika Travel | Agen Perjalanan & Rental Mobil Terpercaya",
-  description: "Mustika Travel melayani rental mobil, paket tour wisata, dan layanan travel antarkota berkualitas dengan armada lengkap dan pelayanan prima.",
+  title: "Mustika Travel | Jelajahi Keindahan Gunung Bromo",
+  description: "Mustika Travel melayani rental mobil, paket tour wisata Gunung Bromo, dan layanan perjalanan antarkota berkualitas di Jombang.",
   keywords: [
     "Mustika Travel",
     "Rental Mobil Jombang",
-    "Paket Tour Wisata",
-    "Travel Antarkota",
-    "Sewa Mobil Murah",
-    "Mustika Travel Jombang"
+    "Paket Wisata Bromo",
+    "Ziarah Wali Songo",
+    "Sewa Hiace Jombang",
+    "Sewa Mobil Murah Jombang"
   ],
   authors: [{ name: "Mustika Travel Team" }],
   openGraph: {
-    title: "Mustika Travel | Agen Perjalanan & Rental Mobil Terpercaya",
-    description: "Mustika Travel melayani rental mobil, paket tour wisata, dan layanan travel antarkota berkualitas dengan armada lengkap dan pelayanan prima.",
+    title: "Mustika Travel | Jelajahi Keindahan Gunung Bromo",
+    description: "Mustika Travel melayani rental mobil, paket tour wisata Gunung Bromo, dan layanan perjalanan antarkota berkualitas di Jombang.",
     siteName: "Mustika Travel",
     locale: "id_ID",
     type: "website",
@@ -53,7 +53,7 @@ export default function RootLayout({
       lang="id"
       className={`${plusJakartaSans.variable} ${nunito.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-brand-light text-brand-dark selection:bg-brand-blue selection:text-white">
+      <body className="min-h-full flex flex-col bg-brand-cream text-brand-dark selection:bg-brand-orange selection:text-white">
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />

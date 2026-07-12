@@ -39,12 +39,12 @@ export default function ArmadaSection() {
   return (
     <section 
       id="armada" 
-      className="bg-brand-blue-bg pt-32 pb-16 md:pt-40 md:pb-24 border-y border-brand-blue/10"
+      className="bg-brand-cream pt-32 pb-16 md:pt-40 md:pb-24 border-y border-slate-200"
       aria-labelledby="armada-title"
     >
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-sans text-xs font-bold tracking-widest text-brand-blue uppercase">
+          <span className="font-sans text-xs font-bold tracking-widest text-brand-orange uppercase">
             Pilihan Armada Terbaik
           </span>
           <h2 
@@ -53,7 +53,7 @@ export default function ArmadaSection() {
           >
             Sewa Mobil Nyaman & Terawat
           </h2>
-          <p className="text-base text-brand-dark/70 mt-4">
+          <p className="text-base text-brand-dark/70 mt-4 font-light">
             Mustika Travel berkomitmen menyajikan armada terawat, bersih, dan ber-AC dingin guna menjamin kelancaran aktivitas perjalanan Anda.
           </p>
         </div>
@@ -64,15 +64,15 @@ export default function ArmadaSection() {
             return (
               <div 
                 key={index}
-                className="bg-white p-8 rounded-2xl border border-brand-blue/10 hover:border-brand-blue transition-all duration-300 flex flex-col justify-between shadow-sm"
+                className="bg-white p-8 rounded-2xl border border-slate-150 hover:border-brand-orange transition-all duration-300 flex flex-col justify-between shadow-sm"
               >
                 <div>
-                  <span className="text-[10px] uppercase font-extrabold text-brand-blue bg-brand-blue-bg px-2.5 py-1 rounded-full">
+                  <span className="text-[10px] uppercase font-extrabold text-brand-orange bg-brand-cream px-2.5 py-1 rounded-full border border-brand-orange/10">
                     {mobil.type}
                   </span>
                   <h3 className="text-xl font-bold text-brand-dark mt-4 font-nunito">{mobil.name}</h3>
                   <span className="text-xs text-slate-400 block mt-1">{mobil.capacity}</span>
-                  <p className="text-sm text-brand-dark/60 leading-relaxed mt-4">{mobil.description}</p>
+                  <p className="text-sm text-brand-dark/60 leading-relaxed mt-4 font-light">{mobil.description}</p>
                   
                   {/* Mini Features */}
                   <div className="mt-6 space-y-2 border-t border-slate-100 pt-4">
@@ -96,9 +96,9 @@ export default function ArmadaSection() {
         </div>
 
         {/* Bottom Banner */}
-        <div className="mt-16 bg-white border-2 border-brand-blue/30 p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="mt-16 bg-white border border-slate-200 p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4 text-left">
-            <div className="h-10 w-10 rounded-full bg-brand-blue-bg flex items-center justify-center text-brand-blue shrink-0">
+            <div className="h-10 w-10 rounded-full bg-brand-cream border border-brand-orange/20 flex items-center justify-center text-brand-orange shrink-0">
               <Heart className="h-5 w-5 fill-current" />
             </div>
             <div>
@@ -108,7 +108,7 @@ export default function ArmadaSection() {
           </div>
           <a
             href="/booking"
-            className="rounded-xl bg-brand-blue px-6 py-3 text-sm font-semibold text-white hover:bg-brand-blue-light transition-colors shrink-0"
+            className="rounded-xl bg-brand-orange px-6 py-3 text-sm font-semibold text-white hover:bg-brand-orange-light transition-colors shrink-0"
           >
             Hubungi Admin
           </a>

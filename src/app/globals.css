@@ -1,25 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf6e9; /* Krem soft sesuai warna bagian dalam logo */
+  --foreground: #2c2520; /* Teks cokelat tua/gelap dari logo */
   
-  /* Brand color tokens: Travel Blue Theme */
-  --brand-blue: #0284c7;       /* Sky blue for main buttons and dark text */
-  --brand-blue-light: #38bdf8; /* Light blue highlights */
-  --brand-blue-bg: #f0f9ff;    /* Soft blue-white tint for sections */
-  --brand-dark: #0f172a;
+  /* Brand color tokens: Terinspirasi dari LOGO.png */
+  --brand-orange: #f06e4b;       /* Oranye coral dari luar logo */
+  --brand-orange-light: #ff8e6e; /* Oranye coral lebih terang untuk hover */
+  --brand-cream: #faf6e9;        /* Krem latar belakang */
+  --brand-dark: #2c2520;         /* Cokelat gelap */
   --brand-light: #ffffff;
+  --brand-blue: #3b82c4;         /* Biru aksen bumi pada logo */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-brand-blue: var(--brand-blue);
-  --color-brand-blue-light: var(--brand-blue-light);
-  --color-brand-blue-bg: var(--brand-blue-bg);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-orange-light: var(--brand-orange-light);
+  --color-brand-cream: var(--brand-cream);
   --color-brand-dark: var(--brand-dark);
   --color-brand-light: var(--brand-light);
+  --color-brand-blue: var(--brand-blue);
   
   --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-nunito: var(--font-nunito), sans-serif;
@@ -27,7 +29,7 @@
 }
 
 body {
-  background-color: var(--brand-light);
+  background-color: var(--brand-cream);
   color: var(--brand-dark);
   font-family: var(--font-sans);
 }
@@ -37,17 +39,17 @@ body {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--brand-light);
+  background: var(--brand-cream);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--brand-blue);
+  background: var(--brand-orange);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--brand-blue-light);
+  background: var(--brand-orange-light);
 }
 
 *:focus-visible {
-  outline: 2px solid var(--brand-blue-light);
+  outline: 2px solid var(--brand-orange-light);
   outline-offset: 2px;
 }
