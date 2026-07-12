@@ -37,36 +37,27 @@ export default function Navbar() {
     return pathname.startsWith(href);
   };
 
-  const isHome = pathname === "/";
-  const headerBgClass = isHome 
-    ? "absolute top-0 left-0 w-full z-50 bg-transparent border-b-0" 
-    : "absolute top-0 left-0 w-full z-50 bg-brand-blue shadow-md border-b border-white/10";
-
-  const ctaBtnClass = isHome
-    ? "bg-brand-blue text-white hover:bg-brand-blue-light"
-    : "bg-white text-brand-blue hover:bg-white/95";
-
   return (
     <>
-      <header className={headerBgClass}>
-        <div className="mx-auto grid grid-cols-2 md:grid-cols-3 items-center max-w-7xl p-4 md:px-8">
+      <header className="absolute top-0 left-0 w-full z-50 bg-transparent border-b border-white/10">
+        <div className="mx-auto flex items-center justify-between max-w-7xl p-4 md:px-8">
           
           {/* Left: Logo & Name */}
           <Link 
             href="/" 
-            className="flex items-center gap-3 transition-opacity hover:opacity-90 justify-start"
+            className="flex items-center gap-3 transition-opacity hover:opacity-90"
             aria-label="Mustika Travel - Kembali ke Beranda"
           >
-            <div className="relative h-12 w-12 shrink-0 rounded-full overflow-hidden bg-white/20 flex items-center justify-center border border-white/10">
-              <span className="font-nunito font-extrabold text-white text-lg tracking-wider">MT</span>
+            <div className="relative h-10 w-10 shrink-0 rounded-xl bg-white/20 flex items-center justify-center border border-white/10">
+              <span className="font-nunito font-extrabold text-white text-base tracking-wider">MT</span>
             </div>
-            <span className="font-nunito font-semibold text-xl tracking-tight text-white leading-none">
+            <span className="font-nunito font-semibold text-lg tracking-tight text-white leading-none">
               Mustika Travel
             </span>
           </Link>
 
           {/* Center: Desktop nav links */}
-          <nav className="hidden md:flex items-center justify-center gap-8" aria-label="Main Navigation">
+          <nav className="hidden md:flex items-center gap-8" aria-label="Main Navigation">
             {navLinks.map((link) => {
               const active = isActive(link.href);
               return (
@@ -86,20 +77,20 @@ export default function Navbar() {
           </nav>
 
           {/* Right: Desktop CTA */}
-          <div className="hidden md:flex justify-end">
+          <div className="hidden md:flex items-center">
             <Link
               href="/booking"
-              className={`inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-300 transform hover:translate-x-0.5 ${ctaBtnClass}`}
+              className="inline-flex items-center gap-2 rounded-xl px-5 py-2 text-xs font-bold transition-all duration-300 bg-white text-brand-blue hover:bg-white/95"
             >
               <span>Booking Sekarang</span>
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>
 
           {/* Mobile: Hamburger / X toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex items-center justify-center p-2 md:hidden col-start-2 ml-auto text-white relative w-10 h-10"
+            className="flex items-center justify-center p-2 md:hidden text-white relative w-10 h-10"
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
             aria-label={isOpen ? "Tutup menu" : "Buka menu"}
