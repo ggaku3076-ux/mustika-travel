@@ -35,9 +35,15 @@ export default function Navbar() {
     return pathname.startsWith(href);
   };
 
+  const isHome = pathname === "/";
+
   return (
     <>
-      <header className="absolute top-0 left-0 w-full z-50 bg-transparent border-b border-white/10">
+      <header className={`absolute top-0 left-0 w-full z-50 border-b transition-all duration-300 ${
+        isHome 
+          ? "bg-transparent border-white/10" 
+          : "bg-brand-blue border-brand-blue/20 shadow-md"
+      }`}>
         <div className="mx-auto flex items-center justify-between max-w-7xl p-4 md:px-8">
           
           {/* Left: Logo Transparan */}
@@ -51,7 +57,7 @@ export default function Navbar() {
               <img
                 src="/Asset/LOGO.png"
                 alt="Mustika Travel Logo"
-                className="h-full w-full object-contain filter drop-shadow-sm mix-blend-multiply bg-transparent"
+                className="h-full w-full object-contain filter drop-shadow-sm bg-transparent"
               />
             </div>
             <span className="font-nunito font-semibold text-lg tracking-tight text-white leading-none">
@@ -143,7 +149,7 @@ export default function Navbar() {
               <img
                 src="/Asset/LOGO.png"
                 alt="Mustika Travel Logo"
-                className="h-full w-full object-contain mix-blend-multiply bg-transparent"
+                className="h-full w-full object-contain bg-transparent"
               />
             </div>
             <span className="font-nunito font-semibold text-lg text-brand-dark tracking-tight">

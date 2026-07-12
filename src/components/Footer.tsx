@@ -20,7 +20,7 @@ export default function Footer() {
                 <img
                   src="/Asset/LOGO.png"
                   alt="Mustika Travel Logo"
-                  className="h-full w-full object-contain mix-blend-multiply bg-transparent"
+                  className="h-full w-full object-contain bg-transparent"
                 />
               </div>
               <span className="font-nunito font-light text-xl text-white tracking-tight">
@@ -94,7 +94,7 @@ export default function Footer() {
                   <img
                     src="/Asset/LOGO.png"
                     alt="Mustika Travel Logo"
-                    className="h-full w-full object-contain mix-blend-multiply bg-transparent"
+                    className="h-full w-full object-contain bg-transparent"
                   />
                 </div>
                 <span className="font-nunito font-semibold text-xl text-white tracking-tight">

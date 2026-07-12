@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf6e9; /* Krem soft sesuai warna bagian dalam logo */
-  --foreground: #2c2520; /* Teks cokelat tua/gelap dari logo */
+  --background: #f0f6fa; /* Soft sky blue tint background */
+  --foreground: #1e293b; /* Dark slate text */
   
-  /* Brand color tokens: Terinspirasi dari LOGO.png */
-  --brand-orange: #f06e4b;       /* Oranye coral dari luar logo */
-  --brand-orange-light: #ff8e6e; /* Oranye coral lebih terang untuk hover */
-  --brand-cream: #faf6e9;        /* Krem latar belakang */
-  --brand-dark: #2c2520;         /* Cokelat gelap */
+  /* Brand color tokens: Terinspirasi dari BACKGROUND DEKSTOP.png */
+  --brand-orange: #4073A7;       /* Biru langit utama */
+  --brand-orange-light: #5893C4; /* Biru langit lebih terang untuk hover */
+  --brand-cream: #f0f6fa;        /* Soft sky blue background */
+  --brand-dark: #1e293b;         /* Slate dark text */
   --brand-light: #ffffff;
-  --brand-blue: #3b82c4;         /* Biru aksen bumi pada logo */
+  --brand-blue: #4073A7;         /* Biru langit utama */
+  --brand-blue-bg: #e6f0fa;      /* Biru langit sangat muda untuk latar belakang seksi */
 }
 
 @theme inline {
@@ -22,6 +23,7 @@
   --color-brand-dark: var(--brand-dark);
   --color-brand-light: var(--brand-light);
   --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-bg: var(--brand-blue-bg);
   
   --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-nunito: var(--font-nunito), sans-serif;
