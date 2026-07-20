@@ -55,14 +55,15 @@ export default function Navbar() {
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
           scrolled
-            ? "bg-brand-dark/85 backdrop-blur-md border-b border-white/10 shadow-lg py-3"
+            ? "bg-brand-dark/95 md:bg-brand-dark/85 md:backdrop-blur-md border-b border-white/10 shadow-md py-3"
             : isHome
-              ? "bg-gradient-to-b from-black/50 via-black/20 to-transparent py-4 border-b border-white/5"
+              ? "bg-gradient-to-b from-black/60 via-black/20 to-transparent py-4 border-b border-white/5"
               : "bg-brand-dark py-4 border-b border-white/10"
         }`}
       >
+
         <div className="mx-auto flex items-center justify-between max-w-7xl px-4 md:px-8">
           
           {/* Left: Logo Transparan */}
@@ -162,10 +163,11 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15, ease: "linear" }}
-              className="fixed inset-0 bg-brand-dark/80 backdrop-blur-sm z-[998] md:hidden transform-gpu"
+              className="fixed inset-0 bg-brand-dark/80 z-[998] md:hidden transform-gpu"
               onClick={() => setIsOpen(false)}
               aria-hidden="true"
             />
+
 
             <nav
               id="mobile-menu"
