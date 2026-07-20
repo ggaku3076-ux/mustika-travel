@@ -143,7 +143,7 @@ export default function Chatbot() {
 
     // Simulate AI thinking delay
     setTimeout(async () => {
-      const response = await generateAIResponse(query);
+      const response = await generateAIResponse(query, messages);
 
       const aiMessage: ChatMessage = {
         id: `msg_ai_${Date.now()}`,
@@ -152,6 +152,7 @@ export default function Chatbot() {
         timestamp: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
         quickActions: response.quickActions,
       };
+
 
       setMessages((prev) => [...prev, aiMessage]);
       setIsTyping(false);

@@ -3,10 +3,60 @@ import { mustikaKnowledge } from "@/lib/mustikaKnowledge";
 
 /**
  * Intelligent AI Chat Service for Mustika Travel.
- * Matches user intent with company knowledge base (fleet, packages, pricing, location).
+ * Integrates with DeepSeek LLM (deepseek-v4-flash) via /api/chat with local Knowledge Base fallback.
  */
-export async function generateAIResponse(userQuery: string): Promise<{ text: string; quickActions?: { label: string; action: string }[] }> {
+export async function generateAIResponse(
+  userQuery: string,
+  chatHistory?: ChatMessage[]
+): Promise<{ text: string; quickActions?: { label: string; action: string }[] }> {
   const query = userQuery.toLowerCase().trim();
+
+  // Try fetching live AI response from DeepSeek API route first
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prompt: userQuery,
+        messages: (chatHistory || []).slice(-6), // Send last 6 messages for conversation memory
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (data.success && data.text) {
+        // Derive contextual quick actions based on response content
+        let actions = [
+          { label: "📲 Chat CS WhatsApp", action: "Buka WA CS" },
+          { label: "🚗 Sewa Mobil", action: "Berapa sewa mobil?" },
+          { label: "🌋 Tour Bromo", action: "Info paket tour Bromo" },
+        ];
+
+        if (data.text.toLowerCase().includes("avanza") || data.text.toLowerCase().includes("innova")) {
+          actions = [
+            { label: "📲 Booking Unit via WA", action: "Saya mau booking armada" },
+            { label: "📝 Formulir Booking", action: "Ke Halaman Booking" },
+          ];
+        } else if (data.text.toLowerCase().includes("bromo") || data.text.toLowerCase().includes("bali") || data.text.toLowerCase().includes("tour")) {
+          actions = [
+            { label: "📲 Booking Tour via WA", action: "Saya mau booking paket tour" },
+            { label: "🧳 Paket Wisata Lainnya", action: "Info paket wisata" },
+          ];
+        }
+
+        return {
+          text: data.text,
+          quickActions: actions,
+        };
+      }
+    }
+  } catch (err) {
+    console.warn("DeepSeek API call failed, falling back to local Knowledge Base:", err);
+  }
+
+  // ==========================================
+  // FALLBACK KNOWLEDGE ENGINE (IF OFFLINE)
+  // ==========================================
 
   // 1. GREETING INTENT
   if (query.includes("halo") || query.includes("hai") || query.includes("pagi") || query.includes("siang") || query.includes("malam") || query.includes("permisi")) {
@@ -22,7 +72,6 @@ export async function generateAIResponse(userQuery: string): Promise<{ text: str
 
   // 2. FLEET / RENTAL / CAR INTENT
   if (query.includes("armada") || query.includes("mobil") || query.includes("sewa") || query.includes("rental") || query.includes("avanza") || query.includes("innova") || query.includes("hiace") || query.includes("elf")) {
-    // Specific vehicle queries
     if (query.includes("avanza")) {
       const v = mustikaKnowledge.armadas.find((a) => a.name.includes("Avanza"))!;
       return {
@@ -55,7 +104,6 @@ export async function generateAIResponse(userQuery: string): Promise<{ text: str
       };
     }
 
-    // General car rental list
     let carText = `🚘 **Daftar Armada Rental Mustika Travel Jombang:**\n\n`;
     mustikaKnowledge.armadas.forEach((car) => {
       carText += `• **${car.name}** (${car.capacity} Penumpang) - *Rp ${car.pricePerDay.toLocaleString("id-ID")}/hari*\n`;
@@ -134,7 +182,6 @@ export async function generateAIResponse(userQuery: string): Promise<{ text: str
     };
   }
 
-
   // 6. DEFAULT / GENERAL QUERY FALLBACK
   return {
     text: `Saya adalah **Mustika AI Assistant** 🤖.\n\nMustika Travel melayani rental mobil (Avanza, Innova, Hiace, Elf) dan paket tour (Bromo, Bali, Jogja) berpusat di **Jombang, Jawa Timur** (Layanan 24 Jam).\n\nAda yang bisa saya bantu jelaskan tentang layanan kami?`,
@@ -145,3 +192,4 @@ export async function generateAIResponse(userQuery: string): Promise<{ text: str
     ],
   };
 }
+
