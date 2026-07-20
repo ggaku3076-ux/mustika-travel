@@ -58,7 +58,7 @@ export default function Hero() {
         aria-hidden="true"
       >
         <Image
-          src="/Asset/BACKGROUND DEKSTOP.png"
+          src="/Asset/BACKGROUND_DEKSTOP.webp"
           alt="Mustika Travel Desktop Background"
           fill
           priority
@@ -74,7 +74,7 @@ export default function Hero() {
         aria-hidden="true"
       >
         <Image
-          src="/Asset/BACKGROUND MOBILE.png"
+          src="/Asset/BACKGROUND_MOBILE.webp"
           alt="Mustika Travel Mobile Background"
           fill
           priority
@@ -82,6 +82,7 @@ export default function Hero() {
           className="object-cover object-center gpu-layer"
         />
       </motion.div>
+
 
       {/* OVERLAY FOR TEXT READABILITY & DEPTH */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/30 pointer-events-none z-10" />

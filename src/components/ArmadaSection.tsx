@@ -12,7 +12,7 @@ export default function ArmadaSection() {
       type: "MPV",
       capacity: "6 Penumpang",
       price: 350000,
-      imagePath: "/Asset/AVANZA.png",
+      imagePath: "/Asset/AVANZA.webp",
       description: "Mobil keluarga sejuta umat yang hemat bahan bakar, sangat cocok untuk perjalanan dalam kota maupun luar kota.",
       features: ["AC Double Blower", "Driver Profesional", "BBM Tidak Termasuk"],
     },
@@ -21,7 +21,7 @@ export default function ArmadaSection() {
       type: "MPV Premium",
       capacity: "7 Penumpang",
       price: 650000,
-      imagePath: "/Asset/INOVA REBORNN.png",
+      imagePath: "/Asset/INOVA_REBORNN.webp",
       description: "Lebih lega, nyaman, suspensi empuk, dan tampilan elegan untuk perjalanan dinas maupun keluarga.",
       features: ["AC Dingin Nyaman", "Driver Profesional", "Audio System Premium"],
     },
@@ -30,7 +30,7 @@ export default function ArmadaSection() {
       type: "Minibus",
       capacity: "14 Penumpang",
       price: 1100000,
-      imagePath: "/Asset/HIACE.png",
+      imagePath: "/Asset/HIACE.webp",
       description: "Pilihan terbaik untuk rombongan wisata skala medium dengan kenyamanan suspensi layaknya sedan.",
       features: ["Kapasitas Lega", "Driver Berpengalaman", "Reclining Seats"],
     },
@@ -39,11 +39,12 @@ export default function ArmadaSection() {
       type: "Minibus",
       capacity: "19 Penumpang",
       price: 1200000,
-      imagePath: "/Asset/ELF LONG.png",
+      imagePath: "/Asset/ELF_LONG.webp",
       description: "Sangat cocok untuk rombongan wisata ziarah wali, kunjungan kerja instansi, atau reuni keluarga besar.",
       features: ["AC Ducting Dingin", "Driver & BBM Opsional", "Bagasi Luas"],
     },
   ];
+
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },

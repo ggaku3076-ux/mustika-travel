@@ -29,7 +29,7 @@ export default function PaketSection() {
       price: 1850000,
       duration: "3 Hari 2 Malam",
       description: "Menjelajahi keindahan Kuta, Ubud, Tanah Lot, Uluwatu, dan kuliner khas Jimbaran dengan hotel bintang 3.",
-      imagePath: "/Asset/BALI.png",
+      imagePath: "/Asset/BALI.webp",
       features: ["Transportasi AC PP Jombang", "Hotel Bintang 3", "Tiket Masuk Wisata", "Makan & Driver Profesional"],
       isPopular: true,
     },
@@ -40,7 +40,7 @@ export default function PaketSection() {
       price: 450000,
       duration: "1 Hari (Midnight)",
       description: "Menikmati golden sunrise Bromo, Kawah Bromo, Pasir Berbisik, dan Bukit Teletubbies menggunakan Jeep 4x4.",
-      imagePath: "/Asset/BROMO.png",
+      imagePath: "/Asset/BROMO.webp",
       features: ["Jeep Bromo", "Tiket Masuk TNBTS", "Driver & BBM", "Dokumentasi & Snack"],
       isPopular: true,
     },
@@ -51,10 +51,11 @@ export default function PaketSection() {
       price: 750000,
       duration: "2 Hari 1 Malam",
       description: "Destinasi Candi Borobudur, Malioboro, Kraton Yogyakarta, Tebing Breksi, dan Pantai Parangtritis.",
-      imagePath: "/Asset/JOGJA.png",
+      imagePath: "/Asset/JOGJA.webp",
       features: ["Penginapan AC", "Tiket Masuk Wisata", "Makan & Transportasi", "Driver Guide"],
     },
   ];
+
 
   const filteredPaket = useMemo(() => {
     return paketList.filter((item) => {
