@@ -153,7 +153,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* === MOBILE FULLSCREEN POPUP MENU === */}
+      {/* === MOBILE FULLSCREEN POPUP MENU (HARDWARE ACCELERATED) === */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -161,23 +161,23 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-brand-dark/70 backdrop-blur-md z-[998] md:hidden"
+              transition={{ duration: 0.15, ease: "linear" }}
+              className="fixed inset-0 bg-brand-dark/80 backdrop-blur-sm z-[998] md:hidden transform-gpu"
               onClick={() => setIsOpen(false)}
               aria-hidden="true"
             />
 
             <nav
               id="mobile-menu"
-              className="fixed inset-0 z-[999] flex items-center justify-center md:hidden p-4"
+              className="fixed inset-0 z-[999] flex items-center justify-center md:hidden p-4 pointer-events-none"
               aria-label="Mobile Navigation"
-              onClick={() => setIsOpen(false)}
             >
               <motion.div 
-                initial={{ scale: 0.9, y: 24, opacity: 0 }}
-                animate={{ scale: 1, y: 0, opacity: 1 }}
-                exit={{ scale: 0.9, y: 24, opacity: 0 }}
-                transition={{ type: "spring", duration: 0.4 }}
-                className="bg-brand-cream rounded-3xl shadow-2xl w-full max-w-xs p-7 flex flex-col items-center gap-5 border border-white/40"
+                initial={{ y: 16, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 16, opacity: 0 }}
+                transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-brand-cream rounded-3xl shadow-xl w-full max-w-xs p-7 flex flex-col items-center gap-5 border border-white/40 pointer-events-auto transform-gpu gpu-layer"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex items-center gap-2.5 mb-1">
@@ -226,6 +226,7 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
+
     </>
   );
 }

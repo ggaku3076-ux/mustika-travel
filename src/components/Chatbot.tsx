@@ -182,35 +182,35 @@ export default function Chatbot() {
       {/* FLOATING CHATBOT TRIGGER BUTTON */}
       <div className="fixed bottom-6 right-6 z-50">
         <motion.button
-          whileHover={{ scale: 1.08 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsOpen(!isOpen)}
-          className="relative flex items-center justify-center h-14 w-14 rounded-full bg-brand-orange text-white shadow-2xl shadow-brand-orange/50 border border-white/20 focus:outline-none cursor-pointer group"
+          className="relative flex items-center justify-center h-14 w-14 rounded-full bg-brand-orange text-white shadow-xl shadow-brand-orange/40 border border-white/20 focus:outline-none cursor-pointer group transform-gpu gpu-layer"
           aria-label="Tanya Mustika AI Assistant"
         >
-          <span className="absolute -top-1 -right-1 flex h-4 w-4">
+          <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-white" />
+            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white" />
           </span>
 
           <AnimatePresence mode="wait">
             {isOpen ? (
               <motion.div
                 key="close"
-                initial={{ rotate: -90, opacity: 0 }}
+                initial={{ rotate: -45, opacity: 0 }}
                 animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
+                exit={{ rotate: 45, opacity: 0 }}
+                transition={{ duration: 0.15 }}
               >
                 <X className="h-6 w-6" />
               </motion.div>
             ) : (
               <motion.div
                 key="bot"
-                initial={{ rotate: 90, opacity: 0 }}
+                initial={{ rotate: 45, opacity: 0 }}
                 animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: -90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
+                exit={{ rotate: -45, opacity: 0 }}
+                transition={{ duration: 0.15 }}
                 className="flex items-center justify-center"
               >
                 <Bot className="h-7 w-7" />
@@ -220,16 +220,17 @@ export default function Chatbot() {
         </motion.button>
       </div>
 
-      {/* CHATBOT POPUP WINDOW */}
+      {/* CHATBOT POPUP WINDOW (HARDWARE ACCELERATED) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 24, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="fixed bottom-24 right-4 sm:right-6 z-50 w-[92vw] sm:w-[400px] h-[520px] max-h-[80vh] bg-white rounded-3xl shadow-2xl border border-slate-200/80 flex flex-col overflow-hidden"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 16 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed bottom-24 right-3 sm:right-6 z-50 w-[94vw] sm:w-[400px] h-[520px] max-h-[78vh] bg-white rounded-3xl shadow-xl border border-slate-200/90 flex flex-col overflow-hidden transform-gpu gpu-layer"
           >
+
             {/* HEADER */}
             <div className="bg-brand-dark text-white px-5 py-4 flex items-center justify-between border-b border-white/10 shrink-0">
               <div className="flex items-center gap-3">
