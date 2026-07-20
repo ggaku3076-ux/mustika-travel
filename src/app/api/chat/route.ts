@@ -38,7 +38,7 @@ PETUNJUK RESPONS:
 
     const apiMessages = [
       { role: "system", content: systemPrompt },
-      ...(messages || []).map((m: any) => ({
+      ...(messages || []).slice(-4).map((m: any) => ({
         role: m.role === "assistant" ? "assistant" : "user",
         content: m.content,
       })),
@@ -57,10 +57,11 @@ PETUNJUK RESPONS:
       body: JSON.stringify({
         model: model,
         messages: apiMessages,
-        temperature: 0.7,
-        max_tokens: 800,
+        temperature: 0.5,
+        max_tokens: 450,
       }),
     });
+
 
     if (!response.ok) {
       const errorText = await response.text();

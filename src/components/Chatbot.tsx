@@ -141,8 +141,8 @@ export default function Chatbot() {
       window.open("https://wa.me/628123456789?text=Halo%20Mustika%20Travel,%20saya%20ingin%20tanya%20layanan", "_blank");
     }
 
-    // Simulate AI thinking delay
-    setTimeout(async () => {
+    // Fetch AI response immediately
+    try {
       const response = await generateAIResponse(query, messages);
 
       const aiMessage: ChatMessage = {
@@ -153,15 +153,18 @@ export default function Chatbot() {
         quickActions: response.quickActions,
       };
 
-
       setMessages((prev) => [...prev, aiMessage]);
       setIsTyping(false);
 
       if (sessionId) {
         saveSupabaseMessage(sessionId, aiMessage);
       }
-    }, 700);
+    } catch (err) {
+      console.warn("AI Chatbot Error:", err);
+      setIsTyping(false);
+    }
   };
+
 
   const handleResetChat = () => {
     const welcomeMsg: ChatMessage = {
