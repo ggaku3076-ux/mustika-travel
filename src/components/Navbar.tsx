@@ -3,16 +3,32 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -38,43 +54,58 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="absolute top-0 left-0 w-full z-50 bg-transparent border-b border-white/10">
-        <div className="mx-auto flex items-center justify-between max-w-7xl p-4 md:px-8">
+      <header 
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-brand-dark/85 backdrop-blur-md border-b border-white/10 shadow-lg py-3"
+            : isHome
+              ? "bg-gradient-to-b from-black/50 via-black/20 to-transparent py-4 border-b border-white/5"
+              : "bg-brand-dark py-4 border-b border-white/10"
+        }`}
+      >
+        <div className="mx-auto flex items-center justify-between max-w-7xl px-4 md:px-8">
           
           {/* Left: Logo Transparan */}
           <Link 
             href="/" 
-            className="flex items-center gap-3 transition-opacity hover:opacity-90"
+            className="flex items-center gap-3 group transition-transform duration-300 hover:scale-[1.02]"
             aria-label="Mustika Travel - Kembali ke Beranda"
           >
-            <div className="relative h-12 w-12 shrink-0 overflow-hidden flex items-center justify-center">
+            <div className="relative h-11 w-11 shrink-0 overflow-hidden flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/Asset/logo real.png"
+                src="/Asset/LOGO.png"
                 alt="Mustika Travel Logo"
-                className="h-full w-full object-contain filter drop-shadow-sm mix-blend-multiply bg-transparent"
+                className="h-full w-full object-contain filter drop-shadow-sm bg-transparent group-hover:rotate-6 transition-transform duration-300"
               />
             </div>
-            <span className="font-nunito font-semibold text-lg tracking-tight text-white leading-none">
+            <span className="font-nunito font-bold text-lg tracking-tight text-white leading-none">
               Mustika Travel
             </span>
           </Link>
 
           {/* Center: Desktop nav links */}
-          <nav className="hidden md:flex items-center gap-8" aria-label="Main Navigation">
+          <nav className="hidden md:flex items-center gap-7" aria-label="Main Navigation">
             {navLinks.map((link) => {
               const active = isActive(link.href);
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-sm font-semibold transition-colors duration-200 relative py-1 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:bg-brand-orange after:transition-all after:duration-300 ${
+                  className={`text-sm font-semibold transition-colors duration-200 relative py-1.5 px-1 ${
                     active 
-                      ? "text-white after:w-1/2" 
-                      : "text-white/80 hover:text-white after:w-0 hover:after:w-1/2"
+                      ? "text-white" 
+                      : "text-white/80 hover:text-white"
                   }`}
                 >
                   {link.name}
+                  {active && (
+                    <motion.div
+                      layoutId="activeNavIndicator"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-orange rounded-full"
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                    />
+                  )}
                 </Link>
               );
             })}
@@ -82,35 +113,42 @@ export default function Navbar() {
 
           {/* Right: Desktop CTA */}
           <div className="hidden md:flex items-center">
-            <Link
-              href="/booking"
-              className="inline-flex items-center gap-2 rounded-xl px-5 py-2 text-xs font-bold transition-all duration-300 bg-brand-orange text-white hover:bg-brand-orange-light shadow-sm"
-            >
-              <span>Booking Sekarang</span>
-              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-            </Link>
+            <motion.div whileHover={{ scale: 1.04, y: -1 }} whileTap={{ scale: 0.98 }}>
+              <Link
+                href="/booking"
+                className="inline-flex items-center gap-2 rounded-2xl px-5 py-2.5 text-xs font-bold transition-all duration-300 bg-brand-orange text-white hover:bg-brand-orange-light shadow-md shadow-brand-orange/25"
+              >
+                <span>Booking Sekarang</span>
+                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </Link>
+            </motion.div>
           </div>
 
           {/* Mobile: Hamburger / X toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex items-center justify-center p-2 md:hidden text-white relative w-10 h-10"
+            className="flex items-center justify-center p-2 md:hidden text-white relative w-10 h-10 focus:outline-none"
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
             aria-label={isOpen ? "Tutup menu" : "Buka menu"}
           >
-            <Menu 
-              className={`h-6 w-6 absolute transition-all duration-300 ease-in-out ${
-                isOpen ? "opacity-0 rotate-90 scale-75" : "opacity-100 rotate-0 scale-100"
-              }`} 
-              aria-hidden="true" 
-            />
-            <X 
-              className={`h-6 w-6 absolute transition-all duration-300 ease-in-out ${
-                isOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-75"
-              }`} 
-              aria-hidden="true" 
-            />
+            <div className="w-6 h-5 flex flex-col justify-between relative">
+              <span 
+                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 transform origin-center ${
+                  isOpen ? "rotate-45 translate-y-[9px]" : ""
+                }`} 
+              />
+              <span 
+                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ${
+                  isOpen ? "opacity-0" : "opacity-100"
+                }`} 
+              />
+              <span 
+                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 transform origin-center ${
+                  isOpen ? "-rotate-45 -translate-y-[9px]" : ""
+                }`} 
+              />
+            </div>
           </button>
         </div>
       </header>
@@ -123,33 +161,35 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-brand-dark/60 backdrop-blur-sm z-[998] md:hidden"
+              className="fixed inset-0 bg-brand-dark/70 backdrop-blur-md z-[998] md:hidden"
               onClick={() => setIsOpen(false)}
               aria-hidden="true"
             />
 
             <nav
               id="mobile-menu"
-              className="fixed inset-0 z-[999] flex items-center justify-center md:hidden"
+              className="fixed inset-0 z-[999] flex items-center justify-center md:hidden p-4"
               aria-label="Mobile Navigation"
+              onClick={() => setIsOpen(false)}
             >
               <motion.div 
-                initial={{ scale: 0.9, y: 32, opacity: 0 }}
+                initial={{ scale: 0.9, y: 24, opacity: 0 }}
                 animate={{ scale: 1, y: 0, opacity: 1 }}
-                exit={{ scale: 0.9, y: 32, opacity: 0 }}
-                transition={{ type: "spring", duration: 0.5 }}
-                className="bg-brand-cream rounded-3xl shadow-2xl w-[85vw] max-w-sm p-8 flex flex-col items-center gap-5"
+                exit={{ scale: 0.9, y: 24, opacity: 0 }}
+                transition={{ type: "spring", duration: 0.4 }}
+                className="bg-brand-cream rounded-3xl shadow-2xl w-full max-w-xs p-7 flex flex-col items-center gap-5 border border-white/40"
+                onClick={(e) => e.stopPropagation()}
               >
-                <div className="flex items-center gap-2.5 mb-2">
+                <div className="flex items-center gap-2.5 mb-1">
                   <div className="relative h-10 w-10 shrink-0 overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src="/Asset/logo real.png"
+                      src="/Asset/LOGO.png"
                       alt="Mustika Travel Logo"
-                      className="h-full w-full object-contain mix-blend-multiply bg-transparent"
+                      className="h-full w-full object-contain bg-transparent"
                     />
                   </div>
-                  <span className="font-nunito font-semibold text-lg text-brand-dark tracking-tight">
+                  <span className="font-nunito font-bold text-lg text-brand-dark tracking-tight">
                     Mustika Travel
                   </span>
                 </div>
@@ -163,8 +203,8 @@ export default function Navbar() {
                       key={link.name}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className={`text-base font-semibold tracking-wide transition-all duration-200 py-1.5 ${
-                        active ? "text-brand-orange font-bold" : "text-brand-dark/70 hover:text-brand-orange"
+                      className={`text-base font-semibold tracking-wide transition-all duration-200 py-1 ${
+                        active ? "text-brand-orange font-extrabold" : "text-brand-dark/70 hover:text-brand-orange"
                       }`}
                     >
                       {link.name}
@@ -177,7 +217,7 @@ export default function Navbar() {
                 <Link
                   href="/booking"
                   onClick={() => setIsOpen(false)}
-                  className="inline-flex items-center justify-center gap-2 w-full rounded-2xl bg-brand-orange py-3 text-sm font-bold text-white hover:bg-brand-orange-light transition-colors duration-200"
+                  className="inline-flex items-center justify-center gap-2 w-full rounded-2xl bg-brand-orange py-3.5 text-sm font-bold text-white hover:bg-brand-orange-light transition-colors duration-200 shadow-md shadow-brand-orange/20"
                 >
                   <span>Booking Sekarang</span>
                 </Link>
@@ -189,3 +229,4 @@ export default function Navbar() {
     </>
   );
 }
+

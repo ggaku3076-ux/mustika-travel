@@ -4,14 +4,16 @@
   --background: #f0f6fa; /* Soft sky blue tint background */
   --foreground: #1e293b; /* Dark slate text */
   
-  /* Brand color tokens: Terinspirasi dari BACKGROUND DEKSTOP.png */
+  /* Brand color tokens */
   --brand-orange: #4073A7;       /* Biru langit utama */
   --brand-orange-light: #5893C4; /* Biru langit lebih terang untuk hover */
   --brand-cream: #f0f6fa;        /* Soft sky blue background */
   --brand-dark: #1e293b;         /* Slate dark text */
   --brand-light: #ffffff;
   --brand-blue: #4073A7;         /* Biru langit utama */
-  --brand-blue-bg: #e6f0fa;      /* Biru langit sangat muda untuk latar belakang seksi */
+  --brand-blue-bg: #e6f0fa;      /* Biru langit sangat muda */
+
+  scroll-behavior: smooth;
 }
 
 @theme inline {
@@ -34,6 +36,7 @@ body {
   background-color: var(--brand-cream);
   color: var(--brand-dark);
   font-family: var(--font-sans);
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -55,3 +58,39 @@ body {
   outline: 2px solid var(--brand-orange-light);
   outline-offset: 2px;
 }
+
+/* GPU Hardware Acceleration & Smooth Rendering Utilities */
+.gpu-layer {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-panel-dark {
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth card transitions */
+.card-hover-effect {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s ease, 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+}
+
+
