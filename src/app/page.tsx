@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import Hero from "@/components/Hero";
-import { Car, Compass, CalendarRange, MapPin, ArrowRight, Sparkles } from "lucide-react";
+import { Car, Compass, CalendarRange, MapPin, ArrowRight, BadgeCheck } from "lucide-react";
 import { motion, Variants } from "framer-motion";
+
 
 export default function Home() {
   const portalCards = [
@@ -89,7 +90,7 @@ export default function Home() {
             className="text-center max-w-3xl mx-auto mb-16"
           >
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-blue/10 font-sans text-xs font-bold tracking-widest text-brand-blue uppercase">
-              <Sparkles className="h-3.5 w-3.5" />
+              <BadgeCheck className="h-3.5 w-3.5" />
               Layanan Perjalanan Kami
             </span>
             <h2 

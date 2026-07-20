@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Users, Calendar, Award, CheckCircle2, ChevronRight, Car, Compass, Plane, Sparkles } from "lucide-react";
+import { Users, Calendar, Award, CheckCircle2, ChevronRight, Car, Compass, Plane, BadgeCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface TransportService {
@@ -99,9 +99,10 @@ export default function AboutSection() {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-orange/10 font-sans text-xs font-bold tracking-widest text-brand-orange uppercase">
-            <Sparkles className="h-3.5 w-3.5" />
+            <BadgeCheck className="h-3.5 w-3.5" />
             Form Pemesanan Mudah
           </span>
+
           <h2 
             id="booking-title" 
             className="text-3xl font-extrabold text-brand-dark sm:text-4xl mt-3 font-nunito"

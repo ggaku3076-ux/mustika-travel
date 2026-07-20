@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Compass, Check, ArrowRight, Sparkles } from "lucide-react";
+import { Search, Compass, Check, ArrowRight, BadgeCheck } from "lucide-react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 
 interface PaketTour {
@@ -93,7 +93,6 @@ export default function PaketSection() {
     },
   };
 
-
   return (
     <section className="py-24 bg-brand-cream relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-5 md:px-8 relative z-10">
@@ -107,9 +106,10 @@ export default function PaketSection() {
           className="text-center max-w-3xl mx-auto mb-16 pt-8"
         >
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-orange/10 text-xs font-bold uppercase tracking-widest text-brand-orange">
-            <Sparkles className="h-3.5 w-3.5" />
+            <BadgeCheck className="h-3.5 w-3.5" />
             Destinasi Populer
           </span>
+
           <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-dark mt-3 font-nunito">Paket Wisata Mustika Travel</h2>
           <p className="text-slate-500 mt-4 text-base font-light leading-relaxed">
             Temukan berbagai rute pilihan terbaik dengan harga kompetitif dan fasilitas lengkap untuk liburan Anda.

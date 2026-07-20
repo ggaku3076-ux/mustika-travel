@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ShieldCheck, UserCheck, Settings, Fuel, Heart, ArrowRight, Sparkles } from "lucide-react";
+import { ShieldCheck, UserCheck, Settings, Fuel, Heart, ArrowRight, BadgeCheck } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 
 export default function ArmadaSection() {
@@ -70,7 +70,6 @@ export default function ArmadaSection() {
     },
   };
 
-
   return (
     <section 
       id="armada" 
@@ -86,9 +85,10 @@ export default function ArmadaSection() {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-orange/10 font-sans text-xs font-bold tracking-widest text-brand-orange uppercase">
-            <Sparkles className="h-3.5 w-3.5" />
+            <BadgeCheck className="h-3.5 w-3.5" />
             Pilihan Armada Terbaik
           </span>
+
           <h2 
             id="armada-title" 
             className="text-3xl sm:text-4xl font-extrabold text-brand-dark mt-3 font-nunito"

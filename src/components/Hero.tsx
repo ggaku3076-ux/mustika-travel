@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Compass, Sparkles, Camera, Map, ArrowRight, Star } from "lucide-react";
+import { Compass, Camera, Map, ArrowRight, ShieldCheck, BadgeCheck, Award } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 
 export default function Hero() {
@@ -42,7 +42,6 @@ export default function Hero() {
       },
     },
   };
-
 
   return (
     <section 
@@ -97,8 +96,7 @@ export default function Hero() {
         >
           {/* FLOATING BADGE */}
           <motion.div variants={badgeVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs font-semibold text-white tracking-wide shadow-sm">
-            <span className="flex h-2 w-2 rounded-full bg-brand-orange animate-ping" />
-            <Sparkles className="h-3.5 w-3.5 text-yellow-300" />
+            <BadgeCheck className="h-4 w-4 text-brand-orange-light shrink-0" />
             <span>Layanan Travel & Rental Terbaik Jombang</span>
           </motion.div>
           
@@ -155,8 +153,8 @@ export default function Hero() {
         >
           <div className="col-span-5 flex items-center gap-4">
             <div className="flex flex-col">
-              <span className="text-xs font-bold uppercase tracking-wider text-brand-orange-light flex items-center gap-1">
-                <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" /> Best Experience
+              <span className="text-xs font-bold uppercase tracking-wider text-brand-orange-light flex items-center gap-1.5">
+                <Award className="h-3.5 w-3.5 text-brand-orange-light" /> Best Experience
               </span>
               <span className="text-[11px] text-white/80">Tersedia Sepanjang Tahun</span>
             </div>
@@ -165,7 +163,7 @@ export default function Hero() {
               <Camera className="h-4 w-4 hover:text-white transition-colors" />
               <Compass className="h-4 w-4 hover:text-white transition-colors" />
               <Map className="h-4 w-4 hover:text-white transition-colors" />
-              <Sparkles className="h-4 w-4 text-yellow-300 animate-pulse" />
+              <ShieldCheck className="h-4 w-4 text-brand-orange-light" />
             </div>
           </div>
 
@@ -180,3 +178,4 @@ export default function Hero() {
     </section>
   );
 }
+
