@@ -51,9 +51,9 @@ export default function Hero() {
     >
       {/* BACKGROUND IMAGES WITH SMOOTH FADE-IN */}
       <motion.div 
-        initial={{ opacity: 0, scale: 1.05 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="absolute inset-0 hidden lg:block z-0" 
         aria-hidden="true"
       >
@@ -67,9 +67,9 @@ export default function Hero() {
         />
       </motion.div>
       <motion.div 
-        initial={{ opacity: 0, scale: 1.05 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="absolute inset-0 block lg:hidden z-0" 
         aria-hidden="true"
       >
@@ -82,6 +82,7 @@ export default function Hero() {
           className="object-cover object-center gpu-layer"
         />
       </motion.div>
+
 
 
       {/* OVERLAY FOR TEXT READABILITY & DEPTH */}
