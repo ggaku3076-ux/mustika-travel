@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { 
   MessageSquare, X, Send, Bot, User, Mic, MicOff, RefreshCw, 
-  BadgeCheck, ExternalLink, Sparkles, ChevronDown 
+  BadgeCheck, ExternalLink, Sparkles, ChevronDown, Loader2 
 } from "lucide-react";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { ChatMessage } from "@/types/chatbot";
 import { generateAIResponse } from "@/services/aiChatService";
@@ -321,19 +322,28 @@ export default function Chatbot() {
                 </motion.div>
               ))}
 
-              {/* TYPING INDICATOR */}
+              {/* TYPING / THINKING INDICATOR */}
               {isTyping && (
-                <div className="flex items-center gap-2 ml-1">
+                <motion.div 
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-2 ml-1"
+                >
                   <div className="h-7 w-7 rounded-xl bg-brand-orange flex items-center justify-center text-white shrink-0 shadow-xs">
-                    <Bot className="h-4 w-4" />
+                    <Bot className="h-4 w-4 animate-pulse" />
                   </div>
-                  <div className="bg-white p-3 rounded-2xl border border-slate-200/80 flex items-center gap-1.5 shadow-xs">
-                    <span className="h-2 w-2 rounded-full bg-brand-orange animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <span className="h-2 w-2 rounded-full bg-brand-orange animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <span className="h-2 w-2 rounded-full bg-brand-orange animate-bounce" style={{ animationDelay: "300ms" }} />
+                  <div className="bg-white py-2.5 px-3.5 rounded-2xl border border-slate-200/90 flex items-center gap-2 shadow-xs text-xs font-medium text-brand-dark/80">
+                    <Loader2 className="h-3.5 w-3.5 text-brand-orange animate-spin" />
+                    <span className="font-semibold text-brand-orange animate-pulse">Thinking...</span>
+                    <div className="flex items-center gap-1 ml-0.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand-orange animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand-orange animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand-orange animate-bounce" style={{ animationDelay: "300ms" }} />
+                    </div>
                   </div>
-                </div>
+                </motion.div>
               )}
+
 
               <div ref={messagesEndRef} />
             </div>
