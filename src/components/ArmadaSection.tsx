@@ -51,22 +51,20 @@ export default function ArmadaSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.14,
-        delayChildren: 0.1,
+        staggerChildren: 0.08,
+        delayChildren: 0.05,
       },
     },
   };
 
   const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 40, scale: 0.95 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        type: "spring",
-        stiffness: 90,
-        damping: 15,
+        duration: 0.35,
+        ease: [0.16, 1, 0.3, 1],
       },
     },
   };
@@ -79,10 +77,10 @@ export default function ArmadaSection() {
     >
       <div className="mx-auto max-w-7xl px-4 md:px-8 relative z-10">
         <motion.div 
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-orange/10 font-sans text-xs font-bold tracking-widest text-brand-orange uppercase">
@@ -106,7 +104,7 @@ export default function ArmadaSection() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: "-40px" }}
           className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
         >
           {armadas.map((mobil, index) => {
@@ -114,27 +112,22 @@ export default function ArmadaSection() {
               <motion.div 
                 key={index}
                 variants={cardVariants}
-                whileHover={{ y: -8, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="bg-white rounded-3xl border border-slate-200 hover:border-brand-orange flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl hover:shadow-brand-orange/10 transition-shadow duration-300 group cursor-pointer"
+                className="bg-white rounded-3xl border border-slate-200 hover:border-brand-orange flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-lg transition-all duration-200 group cursor-pointer transform-gpu gpu-layer"
               >
                 {/* Image Header with smooth zoom */}
                 <div className="relative h-48 w-full bg-gradient-to-b from-slate-50 to-white border-b border-slate-100 flex items-center justify-center overflow-hidden">
-                  <motion.div 
-                    whileHover={{ scale: 1.08, rotate: -1 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                    className="relative w-full h-full p-4 flex items-center justify-center gpu-layer"
-                  >
+                  <div className="relative w-full h-full p-4 flex items-center justify-center gpu-layer">
                     <Image
                       src={mobil.imagePath}
                       alt={mobil.name}
                       fill
                       priority={index < 2}
                       sizes="(max-width: 768px) 100vw, 25vw"
-                      className="object-contain p-2"
+                      className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
                     />
-                  </motion.div>
+                  </div>
                 </div>
+
 
                 <div className="p-6 flex-grow flex flex-col justify-between">
                   <div>

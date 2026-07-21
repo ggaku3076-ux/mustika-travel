@@ -69,28 +69,21 @@ export default function PaketSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.1,
+        staggerChildren: 0.08,
+        delayChildren: 0.05,
       },
     },
   };
 
   const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 36, scale: 0.95 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        type: "spring",
-        stiffness: 90,
-        damping: 15,
+        duration: 0.35,
+        ease: [0.16, 1, 0.3, 1],
       },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.9,
-      transition: { duration: 0.2 },
     },
   };
 
@@ -100,10 +93,10 @@ export default function PaketSection() {
         
         {/* Header */}
         <motion.div 
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-center max-w-3xl mx-auto mb-16 pt-8"
         >
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-orange/10 text-xs font-bold uppercase tracking-widest text-brand-orange">
@@ -118,13 +111,7 @@ export default function PaketSection() {
         </motion.div>
 
         {/* Search Bar */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-col md:flex-row gap-4 items-center justify-between mb-12"
-        >
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-12">
           <div className="text-sm font-semibold text-slate-500">
             Menampilkan <span className="text-brand-orange font-bold">{filteredPaket.length}</span> Paket Wisata Pilihan
           </div>
@@ -140,46 +127,35 @@ export default function PaketSection() {
             />
             <Search className="absolute left-3.5 top-3.5 h-4.5 w-4.5 text-slate-400" />
           </div>
-        </motion.div>
+        </div>
 
         {/* Paket Grid */}
         <motion.div 
-          layout
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: "-40px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          <AnimatePresence mode="popLayout">
-            {filteredPaket.map((pkg) => (
-              <motion.div
-                key={pkg.id}
-                layout
-                variants={cardVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                whileHover={{ y: -8, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-brand-orange/10 transition-shadow duration-300 flex flex-col justify-between group cursor-pointer"
-              >
-                {/* Card Image Header with Zoom effect */}
-                <div className="relative h-56 w-full bg-slate-100 overflow-hidden">
-                  <motion.div 
-                    whileHover={{ scale: 1.07 }}
-                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative h-full w-full gpu-layer"
-                  >
-                    <Image
-                      src={pkg.imagePath}
-                      alt={pkg.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover object-center"
-                    />
-                  </motion.div>
+          {filteredPaket.map((pkg) => (
+            <motion.div
+              key={pkg.id}
+              variants={cardVariants}
+              className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-200 flex flex-col justify-between group cursor-pointer transform-gpu gpu-layer"
+            >
+              {/* Card Image Header with Zoom effect */}
+              <div className="relative h-56 w-full bg-slate-100 overflow-hidden">
+                <div className="relative h-full w-full gpu-layer">
+                  <Image
+                    src={pkg.imagePath}
+                    alt={pkg.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                  />
                 </div>
+              </div>
+
 
                 {/* Card Top */}
                 <div className="p-6 md:p-8 flex-grow">
@@ -277,8 +253,8 @@ export default function PaketSection() {
 
               </motion.div>
             ))}
-          </AnimatePresence>
         </motion.div>
+
 
         {filteredPaket.length === 0 && (
           <motion.div 

@@ -59,7 +59,12 @@ body {
   outline-offset: 2px;
 }
 
-/* GPU Hardware Acceleration & Smooth Rendering Utilities */
+/* Ultra-Fast 60 FPS Scroll & Hardware Acceleration Utilities */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 600px;
+}
+
 .gpu-layer {
   transform: translateZ(0);
   will-change: transform, opacity;
@@ -78,17 +83,14 @@ body {
 }
 
 
-/* Smooth card transitions - Only trigger hover on devices supporting hover */
+/* Smooth card transitions - GPU Native */
 @media (hover: hover) {
   .card-hover-effect {
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .card-hover-effect:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.06);
   }
 }
-
-
-
