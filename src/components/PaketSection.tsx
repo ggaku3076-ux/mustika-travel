@@ -211,22 +211,70 @@ export default function PaketSection() {
                 </div>
 
                 {/* Card Footer */}
-                <div className="px-6 py-5 md:px-8 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
-                  <div>
-                    <span className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider">Mulai Dari</span>
-                    <span className="text-xl font-extrabold text-brand-dark">
-                      Rp {pkg.price.toLocaleString("id-ID")}
-                    </span>
+                <div className="px-6 py-5 md:px-8 bg-slate-50 border-t border-slate-100 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider">Mulai Dari</span>
+                      <span className="text-xl font-extrabold text-brand-dark">
+                        Rp {pkg.price.toLocaleString("id-ID")}
+                      </span>
+                    </div>
+
+                    <Link
+                      href={`/booking?paket=${pkg.id}`}
+                      className="inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-orange-light text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-xs"
+                    >
+                      <span>Pesan</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
                   </div>
 
-                  <Link
-                    href={`/booking?paket=${pkg.id}`}
-                    className="inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-orange-light text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-xs"
+                  {/* Instant PDF Download Button */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      import("@/lib/pdfGenerator").then(({ generateItineraryPDF }) => {
+                        generateItineraryPDF({
+                          title: pkg.name,
+                          destination: pkg.name.replace("Paket Wisata ", "").replace("Trip ", ""),
+                          duration: pkg.duration,
+                          passengerCount: 4,
+                          tripStyle: "Family Private Tour",
+                          pricePerPerson: pkg.price,
+                          totalPrice: pkg.price * 4,
+                          downPayment: Math.round(pkg.price * 4 * 0.3),
+                          recommendedVehicle: "Toyota Avanza / Innova Reborn",
+                          highlights: pkg.features,
+                          dayByDay: [
+                            {
+                              day: "Hari 1",
+                              title: `Penjemputan & Penjelajahan Utama ${pkg.name}`,
+                              activities: [
+                                "07:00 - Penjemputan peserta di Jombang / Surabaya dengan kendaraan AC nyaman.",
+                                "12:00 - Makan siang kuliner khas lokal & check-in penginapan.",
+                                "15:00 - Menikmati objek wisata unggulan & spot foto terbaik.",
+                              ],
+                            },
+                            {
+                              day: "Hari 2",
+                              title: "Wisata Souvenir & Kepulangan",
+                              activities: [
+                                "08:00 - Breakfast hotel & check-out penginapan.",
+                                "10:00 - Pusat oleh-oleh khas & cinderamata.",
+                                "14:00 - Perjalanan kembali ke Jombang, tour selesai dengan aman & berkesan.",
+                              ],
+                            },
+                          ],
+                        });
+                      });
+                    }}
+                    className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-white border border-slate-200 hover:border-brand-orange text-slate-700 hover:text-brand-orange text-[11px] font-bold transition-all shadow-2xs cursor-pointer"
                   >
-                    <span>Pesan</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
+                    <span>📥 Download PDF Brosur Resmi</span>
+                  </button>
                 </div>
+
               </motion.div>
             ))}
           </AnimatePresence>

@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import Hero from "@/components/Hero";
+import AITripCustomizer from "@/components/AITripCustomizer";
 import { Car, Compass, CalendarRange, MapPin, ArrowRight, BadgeCheck } from "lucide-react";
 import { motion, Variants } from "framer-motion";
-
 
 export default function Home() {
   const portalCards = [
@@ -66,7 +66,6 @@ export default function Home() {
       },
     },
   };
-
 
   return (
     <>
@@ -155,7 +154,11 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* AI Smart Budget & Trip Customizer Section */}
+      <AITripCustomizer />
     </>
   );
 }
+
 
