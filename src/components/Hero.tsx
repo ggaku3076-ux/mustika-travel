@@ -97,7 +97,7 @@ export default function Hero() {
           className="max-w-xl text-center lg:text-left flex flex-col items-center lg:items-start gap-4 md:gap-5 mb-4"
         >
           {/* FLOATING BADGE */}
-          <motion.div variants={badgeVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs font-semibold text-white tracking-wide shadow-sm">
+          <motion.div variants={badgeVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/20 border border-white/30 text-xs font-semibold text-white tracking-wide shadow-xs">
             <BadgeCheck className="h-4 w-4 text-brand-orange-light shrink-0" />
             <span>Layanan Travel & Rental Terbaik Jombang</span>
           </motion.div>
@@ -137,7 +137,7 @@ export default function Hero() {
             <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.98 }}>
               <Link
                 href="/paket"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/25 text-white font-semibold text-sm transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white/20 hover:bg-white/30 border border-white/30 text-white font-semibold text-sm transition-colors duration-200"
               >
                 <Compass className="h-4 w-4 text-blue-200" />
                 <span>Lihat Paket Wisata</span>
@@ -151,8 +151,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden md:grid grid-cols-12 gap-6 pt-4 border-t border-white/15 mt-4 items-center text-left w-full backdrop-blur-xs"
+          className="hidden md:grid grid-cols-12 gap-6 pt-4 border-t border-white/15 mt-4 items-center text-left w-full bg-brand-dark/40"
         >
+
           <div className="col-span-5 flex items-center gap-4">
             <div className="flex flex-col">
               <span className="text-xs font-bold uppercase tracking-wider text-brand-orange-light flex items-center gap-1.5">
