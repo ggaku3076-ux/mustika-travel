@@ -1,10 +1,7 @@
-"use client";
-
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import AITripCustomizer from "@/components/AITripCustomizer";
 import { Car, Compass, CalendarRange, MapPin, ArrowRight, BadgeCheck } from "lucide-react";
-import { motion, Variants } from "framer-motion";
 
 export default function Home() {
   const portalCards = [
@@ -42,29 +39,6 @@ export default function Home() {
     },
   ];
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.05,
-      },
-    },
-  };
-
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.35,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  };
-
   return (
     <>
       <Hero />
@@ -75,13 +49,7 @@ export default function Home() {
         aria-labelledby="portal-title"
       >
         <div className="mx-auto max-w-7xl px-4 md:px-8 relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
+          <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-blue/10 font-sans text-xs font-bold tracking-widest text-brand-blue uppercase">
               <BadgeCheck className="h-3.5 w-3.5" />
               Layanan Perjalanan Kami
@@ -95,22 +63,15 @@ export default function Home() {
             <p className="text-base text-brand-dark/70 mt-4 leading-relaxed font-light">
               Pilih layanan di bawah ini untuk melihat detail paket sewa mobil, rute tour, simulasi pemesanan, atau untuk menghubungi tim CS kami.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {portalCards.map((card, index) => {
               const IconComponent = card.icon;
               return (
-                <motion.div
+                <div
                   key={index}
-                  variants={cardVariants}
-                  className="bg-white p-7 rounded-3xl border border-brand-blue/15 hover:border-brand-blue flex flex-col justify-between items-start text-left shadow-sm hover:shadow-lg transition-all duration-200 relative group cursor-pointer transform-gpu gpu-layer"
+                  className="bg-white p-7 rounded-3xl border border-brand-blue/15 hover:border-brand-blue flex flex-col justify-between items-start text-left shadow-xs hover:shadow-md transition-all duration-200 relative group cursor-pointer"
                 >
                   <div className="flex flex-col gap-4 w-full">
                     <div className="flex items-center justify-between w-full">
@@ -137,18 +98,15 @@ export default function Home() {
                     <span>{card.linkText}</span>
                     <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1.5 transition-transform duration-200" aria-hidden="true" />
                   </Link>
-                </motion.div>
+                </div>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
-
 
       {/* AI Smart Budget & Trip Customizer Section */}
       <AITripCustomizer />
     </>
   );
 }
-
-

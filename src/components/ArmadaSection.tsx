@@ -1,9 +1,6 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { ShieldCheck, UserCheck, Settings, Fuel, Heart, ArrowRight, BadgeCheck } from "lucide-react";
-import { motion, Variants } from "framer-motion";
+import { Heart, ArrowRight, BadgeCheck } from "lucide-react";
 
 export default function ArmadaSection() {
   const armadas = [
@@ -45,30 +42,6 @@ export default function ArmadaSection() {
     },
   ];
 
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.05,
-      },
-    },
-  };
-
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.35,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  };
-
   return (
     <section 
       id="armada" 
@@ -76,13 +49,7 @@ export default function ArmadaSection() {
       aria-labelledby="armada-title"
     >
       <div className="mx-auto max-w-7xl px-4 md:px-8 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
+        <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-orange/10 font-sans text-xs font-bold tracking-widest text-brand-orange uppercase">
             <BadgeCheck className="h-3.5 w-3.5" />
             Pilihan Armada Terbaik
@@ -97,37 +64,29 @@ export default function ArmadaSection() {
           <p className="text-base text-brand-dark/70 mt-4 font-light leading-relaxed">
             Mustika Travel berkomitmen menyajikan armada terawat, bersih, dan ber-AC dingin guna menjamin kelancaran aktivitas perjalanan Anda.
           </p>
-        </motion.div>
+        </div>
 
         {/* Armada Cards Grid */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-40px" }}
-          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
-        >
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {armadas.map((mobil, index) => {
             return (
-              <motion.div 
+              <div 
                 key={index}
-                variants={cardVariants}
-                className="bg-white rounded-3xl border border-slate-200 hover:border-brand-orange flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-lg transition-all duration-200 group cursor-pointer transform-gpu gpu-layer"
+                className="bg-white rounded-3xl border border-slate-200 hover:border-brand-orange flex flex-col justify-between overflow-hidden shadow-xs hover:shadow-md transition-all duration-200 group cursor-pointer"
               >
-                {/* Image Header with smooth zoom */}
+                {/* Image Header */}
                 <div className="relative h-48 w-full bg-gradient-to-b from-slate-50 to-white border-b border-slate-100 flex items-center justify-center overflow-hidden">
-                  <div className="relative w-full h-full p-4 flex items-center justify-center gpu-layer">
+                  <div className="relative w-full h-full p-4 flex items-center justify-center">
                     <Image
                       src={mobil.imagePath}
                       alt={mobil.name}
                       fill
                       priority={index < 2}
                       sizes="(max-width: 768px) 100vw, 25vw"
-                      className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+                      className="object-contain p-2 transition-transform duration-200 group-hover:scale-105"
                     />
                   </div>
                 </div>
-
 
                 <div className="p-6 flex-grow flex flex-col justify-between">
                   <div>
@@ -160,19 +119,13 @@ export default function ArmadaSection() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
+        </div>
 
         {/* Bottom Banner */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-16 bg-white border border-slate-200 p-6 md:p-8 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm hover:shadow-md transition-shadow"
-        >
+        <div className="mt-16 bg-white border border-slate-200 p-6 md:p-8 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xs hover:shadow-md transition-shadow">
           <div className="flex items-center gap-4 text-left">
             <div className="h-12 w-12 rounded-2xl bg-brand-cream border border-brand-orange/20 flex items-center justify-center text-brand-orange shrink-0 shadow-xs">
               <Heart className="h-6 w-6 fill-current" />
@@ -182,18 +135,15 @@ export default function ArmadaSection() {
               <p className="text-xs text-brand-dark/60 mt-1 font-light">Hubungi CS kami untuk konsultasi detail syarat lepas kunci atau ketersediaan driver berpengalaman.</p>
             </div>
           </div>
-          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-            <Link
-              href="/booking"
-              className="inline-flex items-center gap-2 rounded-2xl bg-brand-orange px-6 py-3.5 text-xs font-bold text-white hover:bg-brand-orange-light transition-colors shadow-md shadow-brand-orange/20 shrink-0"
-            >
-              <span>Hubungi Admin</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
-        </motion.div>
+          <Link
+            href="/booking"
+            className="inline-flex items-center gap-2 rounded-2xl bg-brand-orange px-6 py-3.5 text-xs font-bold text-white hover:bg-brand-orange-light transition-colors shadow-md shadow-brand-orange/20 shrink-0"
+          >
+            <span>Hubungi Admin</span>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
       </div>
     </section>
   );
 }
-

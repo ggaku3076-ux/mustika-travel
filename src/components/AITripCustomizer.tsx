@@ -2,11 +2,12 @@
 
 import { useState, useMemo } from "react";
 import { 
-  Wand2, Users, Calendar, Sparkles, Download, MessageSquare, 
-  BadgeCheck, Car, ShieldCheck, CheckCircle2, ChevronRight, Info 
+  Wand2, Users, Calendar, Sparkles, Download, MessageSquare, BadgeCheck, Car 
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { generateItineraryPDF } from "@/lib/pdfGenerator";
+
+
+
 
 export default function AITripCustomizer() {
   const [destination, setDestination] = useState<string>("Gunung Bromo");
@@ -179,7 +180,8 @@ export default function AITripCustomizer() {
         {/* HEADER SECTION */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-orange/10 font-sans text-xs font-bold tracking-widest text-brand-orange uppercase shadow-2xs">
-            <Wand2 className="h-4 w-4 animate-pulse" />
+            <Wand2 className="h-4 w-4" />
+
             AI Smart Budget & Trip Customizer
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-dark mt-3 font-nunito tracking-tight">
