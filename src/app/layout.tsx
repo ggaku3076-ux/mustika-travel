@@ -54,6 +54,10 @@ export default function RootLayout({
       lang="id"
       className={`${plusJakartaSans.variable} ${nunito.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-full flex flex-col bg-brand-cream text-brand-dark selection:bg-brand-orange selection:text-white">
         <Navbar />
         <main className="flex-grow">{children}</main>
@@ -61,6 +65,7 @@ export default function RootLayout({
         <Chatbot />
       </body>
     </html>
+
   );
 }
 
