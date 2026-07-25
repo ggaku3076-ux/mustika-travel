@@ -12,7 +12,7 @@ export default function Hero() {
       {/* BACKGROUND IMAGES */}
       <div className="absolute inset-0 hidden lg:block z-0" aria-hidden="true">
         <Image
-          src="/Asset/BACKGROUND_DEKSTOP.webp"
+          src="/Asset/BACKGROUND_BROMO_DESKTOP.webp"
           alt="Mustika Travel Desktop Background"
           fill
           priority
@@ -22,7 +22,7 @@ export default function Hero() {
       </div>
       <div className="absolute inset-0 block lg:hidden z-0" aria-hidden="true">
         <Image
-          src="/Asset/BACKGROUND_MOBILE.webp"
+          src="/Asset/BACKGROUND_BROMO_MOBILE.webp"
           alt="Mustika Travel Mobile Background"
           fill
           priority
@@ -30,6 +30,7 @@ export default function Hero() {
           className="object-cover object-center"
         />
       </div>
+
 
       {/* OVERLAY FOR TEXT READABILITY & DEPTH */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/30 pointer-events-none z-10" />
