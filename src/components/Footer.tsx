@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { MapPin, Phone, Mail, Clock, Compass, ExternalLink } from "lucide-react";
+import { useBrand } from "@/context/BrandContext";
 
 export default function Footer() {
+  const { brandName } = useBrand();
+
   return (
     <footer 
       id="kontak" 
@@ -19,12 +24,12 @@ export default function Footer() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/Asset/LOGO.png"
-                  alt="Mustika Travel Logo"
+                  alt={`${brandName} Logo`}
                   className="h-full w-full object-contain bg-transparent"
                 />
               </div>
-              <span className="font-nunito font-light text-xl text-white tracking-tight">
-                Mustika Travel
+              <span className="font-nunito font-bold text-xl text-white tracking-tight">
+                {brandName}
               </span>
             </div>
             <p className="text-xs text-white/75 leading-relaxed max-w-[280px]">
@@ -93,16 +98,16 @@ export default function Footer() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/Asset/LOGO.png"
-                    alt="Mustika Travel Logo"
+                    alt={`${brandName} Logo`}
                     className="h-full w-full object-contain bg-transparent"
                   />
                 </div>
                 <span className="font-nunito font-semibold text-xl text-white tracking-tight">
-                  Mustika Travel
+                  {brandName}
                 </span>
               </div>
               <p className="text-sm text-white/80 leading-relaxed">
-                Menyediakan armada terbaik dan paket tour menarik untuk perjalanan bisnis maupun liburan keluarga Anda di Jombang.
+                Menyediakan armada terbaik dan paket tour menarik untuk perjalanan bisnis maupun liburan keluarga Anda.
               </p>
             </div>
 
@@ -120,8 +125,8 @@ export default function Footer() {
             <div>
               <h4 className="font-semibold text-sm mb-4 uppercase tracking-wider text-brand-orange">Layanan</h4>
               <ul className="flex flex-col gap-2.5 text-sm text-white/80">
-                <li>Sewa Mobil Jombang</li>
-                <li>Paket Tour Bali / Malang</li>
+                <li>Sewa Mobil & Driver</li>
+                <li>Paket Tour Bromo / Bali / Malang</li>
                 <li>Antar Jemput Bandara</li>
                 <li>Ziarah Wali Songo</li>
               </ul>
@@ -132,7 +137,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-3 text-sm text-white/80">
                 <li className="flex items-start gap-2.5">
                   <MapPin className="h-5 w-5 shrink-0 text-brand-orange" />
-                  <span>Kabupaten Jombang, Jawa Timur</span>
+                  <span>Jawa Timur, Indonesia</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Phone className="h-5 w-5 shrink-0 text-brand-orange" />
@@ -140,14 +145,14 @@ export default function Footer() {
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Mail className="h-5 w-5 shrink-0 text-brand-orange" />
-                  <a href="mailto:info@mustikatravel.com" className="hover:text-white transition-colors">info@mustikatravel.com</a>
+                  <a href="mailto:info@travel.com" className="hover:text-white transition-colors">info@travel.com</a>
                 </li>
               </ul>
             </div>
           </div>
 
           <div className="flex items-center justify-between pt-8 border-t border-white/10 text-xs text-white/60">
-            <p>© 2026 Mustika Travel. All rights reserved.</p>
+            <p>© 2026 {brandName}. All rights reserved.</p>
             <div className="flex gap-4">
               <Link href="#" className="hover:text-white">Syarat & Ketentuan</Link>
               <Link href="#" className="hover:text-white">Kebijakan Privasi</Link>

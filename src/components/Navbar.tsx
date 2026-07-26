@@ -5,8 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useBrand } from "@/context/BrandContext";
 
 export default function Navbar() {
+  const { brandName } = useBrand();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -76,18 +78,18 @@ export default function Navbar() {
           <Link 
             href="/" 
             className="flex items-center gap-3 group transition-transform duration-300 hover:scale-[1.02]"
-            aria-label="Mustika Travel - Kembali ke Beranda"
+            aria-label={`${brandName} - Kembali ke Beranda`}
           >
             <div className="relative h-11 w-11 shrink-0 overflow-hidden flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/Asset/LOGO.png"
-                alt="Mustika Travel Logo"
+                alt={`${brandName} Logo`}
                 className="h-full w-full object-contain filter drop-shadow-sm bg-transparent group-hover:rotate-6 transition-transform duration-300"
               />
             </div>
             <span className="font-nunito font-bold text-lg tracking-tight text-white leading-none">
-              Mustika Travel
+              {brandName}
             </span>
           </Link>
 
@@ -193,12 +195,12 @@ export default function Navbar() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/Asset/LOGO.png"
-                      alt="Mustika Travel Logo"
+                      alt={`${brandName} Logo`}
                       className="h-full w-full object-contain bg-transparent"
                     />
                   </div>
                   <span className="font-nunito font-bold text-lg text-brand-dark tracking-tight">
-                    Mustika Travel
+                    {brandName}
                   </span>
                 </div>
 

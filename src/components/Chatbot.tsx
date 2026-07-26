@@ -10,8 +10,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChatMessage } from "@/types/chatbot";
 import { generateAIResponse } from "@/services/aiChatService";
 import { createSupabaseChatSession, saveSupabaseMessage, fetchSupabaseChatHistory } from "@/lib/supabase";
+import { useBrand } from "@/context/BrandContext";
 
 export default function Chatbot() {
+  const { brandName } = useBrand();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputQuery, setInputQuery] = useState<string>("");
@@ -35,12 +37,12 @@ export default function Chatbot() {
     const welcomeMsg: ChatMessage = {
       id: "msg_welcome",
       role: "assistant",
-      content: "Halo! Saya **Mustika AI Assistant** 🤖. Selamat datang di Mustika Travel Jombang! \n\nAda yang bisa saya bantu jelaskan tentang layanan sewa mobil, rute paket wisata, atau cara booking hari ini?",
+      content: `Halo! Saya **${brandName} AI Assistant** 🤖. Selamat datang di **${brandName}**!\n\nAda yang bisa saya bantu jelaskan tentang layanan sewa mobil, rute paket wisata, atau cara booking hari ini?`,
       timestamp: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
       quickActions: [
         { label: "🚗 Lihat Sewa Mobil", action: "Berapa sewa mobil?" },
         { label: "🌋 Tour Bromo", action: "Info paket tour Bromo" },
-        { label: "📍 Lokasi Kantor", action: "Dimana alamat Mustika Travel?" },
+        { label: `📍 Lokasi ${brandName}`, action: `Dimana alamat ${brandName}?` },
       ],
     };
 
@@ -244,10 +246,10 @@ export default function Chatbot() {
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <h3 className="font-nunito font-bold text-sm leading-none">Mustika AI</h3>
+                    <h3 className="font-nunito font-bold text-sm leading-none">{brandName} AI</h3>
                     <BadgeCheck className="h-4 w-4 text-brand-orange-light shrink-0" />
                   </div>
-                  <span className="text-[11px] text-white/70 font-light mt-0.5 block">Asisten Pintar Mustika Travel</span>
+                  <span className="text-[11px] text-white/70 font-light mt-0.5 block">Asisten Pintar {brandName}</span>
                 </div>
               </div>
 

@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Compass, Camera, Map, ArrowRight, ShieldCheck, BadgeCheck, Award } from "lucide-react";
+import { useBrand } from "@/context/BrandContext";
 
 export default function Hero() {
+  const { brandName } = useBrand();
+
   return (
     <section 
       id="beranda" 
@@ -13,7 +18,7 @@ export default function Hero() {
       <div className="absolute inset-0 hidden lg:block z-0" aria-hidden="true">
         <Image
           src="/Asset/BACKGROUND_BROMO_DESKTOP.webp"
-          alt="Mustika Travel Desktop Background"
+          alt={`${brandName} Desktop Background`}
           fill
           priority
           sizes="100vw"
@@ -23,7 +28,7 @@ export default function Hero() {
       <div className="absolute inset-0 block lg:hidden z-0" aria-hidden="true">
         <Image
           src="/Asset/BACKGROUND_BROMO_MOBILE.webp"
-          alt="Mustika Travel Mobile Background"
+          alt={`${brandName} Mobile Background`}
           fill
           priority
           sizes="100vw"
@@ -41,7 +46,7 @@ export default function Hero() {
           {/* FLOATING BADGE */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/20 border border-white/30 text-xs font-semibold text-white tracking-wide shadow-xs">
             <BadgeCheck className="h-4 w-4 text-brand-orange-light shrink-0" />
-            <span>Layanan Travel & Rental Terbaik Jombang</span>
+            <span>Layanan Travel & Rental Terbaik {brandName}</span>
           </div>
           
           {/* MAIN HEADING */}
