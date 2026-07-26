@@ -86,7 +86,7 @@ export default function Hero() {
         </div>
 
         {/* HERO FOOTER - ENHANCED STATS BAR */}
-        <div className="hidden md:grid grid-cols-12 gap-6 pt-4 border-t border-white/15 mt-4 items-center text-left w-full bg-brand-dark/40">
+        <div className="hidden md:grid grid-cols-12 gap-6 pt-4 border-t border-white/15 mt-4 items-center text-left w-full bg-transparent">
           <div className="col-span-5 flex items-center gap-4">
             <div className="flex flex-col">
               <span className="text-xs font-bold uppercase tracking-wider text-brand-orange-light flex items-center gap-1.5">
